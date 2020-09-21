@@ -1,1 +1,1 @@
-web: uvicorn iss:app --port=${PORT}
+web: uvicorn iss:app --host=0.0.0.0 --port=${PORT}
