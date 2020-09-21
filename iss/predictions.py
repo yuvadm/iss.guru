@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from skyfield.api import Topos, load
 
 TEL_AVIV = Topos('32.0853 N', '34.7817 E')
@@ -22,12 +21,3 @@ def get_predictions(location=TEL_AVIV, satellite_name=ISS):
         name = ('rise above 30°', 'culminate', 'set below 30°')[event]
         print(ti)
         print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
-
-
-
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}

@@ -12,7 +12,7 @@ fastapi = "*"
 uvicorn = "*"
 
 [scripts]
-server = "uvicorn iss:app"
+server = "uvicorn iss.server:app"
 
 [requires]
 python_version = "3.8"
