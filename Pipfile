@@ -8,6 +8,11 @@ verify_ssl = true
 [packages]
 pyephem = "*"
 skyfield = "*"
+fastapi = "*"
+uvicorn = "*"
+
+[scripts]
+server = "uvicorn iss:app"
 
 [requires]
 python_version = "3.8"
