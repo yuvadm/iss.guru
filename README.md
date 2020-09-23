@@ -3,6 +3,7 @@
 ## Dev
 
 ```bash
-$ pipenv sync
+$ pipenv sync -d
+$ pipenv run pre-commit install
 $ pipenv run server
 ```
