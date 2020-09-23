@@ -1,11 +1,10 @@
 from skyfield.api import Topos, load
 
-TEL_AVIV = Topos('32.0853 N', '34.7817 E')
+TEL_AVIV = Topos("32.0853 N", "34.7817 E")
 ISS = "ISS (ZARYA)"
 
 
 class Predictions(object):
-
     def __init__(self, lat, lng, tz="UTC", satellite=ISS):
         self.lat = lat
         self.lng = lng
@@ -13,7 +12,7 @@ class Predictions(object):
         self.satellite = satellite
 
     def init_stations(self):
-        stations_url = 'http://celestrak.com/NORAD/elements/stations.txt'
+        stations_url = "http://celestrak.com/NORAD/elements/stations.txt"
         return load.tle_file(stations_url)
 
     def get_next_days_timescale(self, days=10):
@@ -33,5 +32,5 @@ class Predictions(object):
         print(t)
         print(events)
         for ti, event in zip(t, events):
-            name = ('rise above 30°', 'culminate', 'set below 30°')[event]
-            print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
+            name = ("rise above 30°", "culminate", "set below 30°")[event]
+            print(ti.utc_strftime("%Y %b %d %H:%M:%S"), name)

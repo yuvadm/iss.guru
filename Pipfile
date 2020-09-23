@@ -5,6 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+black = "==19.10b0"
+pylint = "*"
+pre-commit = "*"
 
 [packages]
 pyephem = "*"
@@ -13,6 +16,8 @@ fastapi = "*"
 uvicorn = "*"
 
 [scripts]
+format = "black iss"
+lint = "pylint -j 0 -d R,C iss"
 test = "pytest"
 server = "uvicorn iss.server:app"
 
