@@ -21,10 +21,13 @@ class Predictions(object):
         t1 = ts.ut1_jd(t0.ut1 + days)
         return t0, t1
 
-    def get_predictions(self, location=TEL_AVIV, satellite_name=ISS):
+    def get_location_topos(self):
+        return Topos(latitude_degrees=self.lat, longitude_degrees=self.lng)
+
+    def get_predictions(self, location=TEL_AVIV):
         satellites = self.init_stations()
         by_name = {sat.name: sat for sat in satellites}
-        satellite = by_name[satellite_name]
+        satellite = by_name[self.satellite]
 
         t0, t1 = self.get_next_days_timescale()
 
