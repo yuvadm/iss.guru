@@ -36,7 +36,7 @@ def test_get_predictions():
     p = Predictions(
         lat=32.0853, lng=34.7817, tz="Asia/Jerusalem", start=start, tle_file=STATIONS
     )
-    preds = p.get_predictions()
+    preds = p.get_prediction_events()
     assert len(preds) == 16
     assert preds[0] == [
         "2020-09-24T21:31:31Z",
@@ -53,5 +53,5 @@ def test_get_predictions():
         days=5,
         tle_file=STATIONS,
     )
-    preds = p.get_predictions()
+    preds = p.get_prediction_events()
     assert len(preds) == 39

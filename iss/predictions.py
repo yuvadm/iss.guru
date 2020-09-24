@@ -45,7 +45,7 @@ class Predictions(object):
         by_name = {sat.name: sat for sat in satellites}
         return by_name[self.satellite]
 
-    def get_predictions(self):
+    def get_prediction_events(self):
         satellite = self.get_satellite()
         t0, t1 = self.get_next_days()
         location = self.get_location()
