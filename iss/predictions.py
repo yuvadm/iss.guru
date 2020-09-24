@@ -46,7 +46,11 @@ class Predictions(object):
         return by_name[self.satellite]
 
     def get_prediction_details(self, rise, culminate, zet):
-        return {"rise": rise, "culminate": culminate, "set": zet}
+        return {
+            "rise": {"iso": rise.utc_iso(), "ut1": rise.ut1},
+            "culminate": {"iso": culminate.utc_iso(), "ut1": culminate.ut1},
+            "set": {"iso": zet.utc_iso(), "ut1": zet.ut1},
+        }
 
     def get_prediction_events(self):
         satellite = self.get_satellite()
