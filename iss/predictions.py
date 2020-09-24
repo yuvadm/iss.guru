@@ -45,6 +45,9 @@ class Predictions(object):
         by_name = {sat.name: sat for sat in satellites}
         return by_name[self.satellite]
 
+    def get_prediction_details(self, rise, culminate, zet):
+        return {"rise": rise, "culminate": culminate, "set": zet}
+
     def get_prediction_events(self):
         satellite = self.get_satellite()
         t0, t1 = self.get_next_days()
@@ -59,5 +62,8 @@ class Predictions(object):
         # docs mention the possibilibity of several culminations
         # https://rhodesmill.org/skyfield/earth-satellites.html#finding-when-a-satellite-rises-and-sets
         # but this doesn't seem to happen in our case
-        preds = chunks(ts, 3)
-        return [[t.utc_iso() for t in p] for p in preds]
+        return list(chunks(ts, 3))
+
+    def get_predictions(self):
+        preds = self.get_prediction_events()
+        return [self.get_prediction_details(*p) for p in preds]

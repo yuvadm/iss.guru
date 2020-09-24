@@ -30,7 +30,7 @@ def test_get_location():
     assert topos.longitude.degrees == tlv.longitude.degrees
 
 
-def test_get_predictions():
+def test_get_prediction_events():
     start = 2459117.245895914
 
     p = Predictions(
@@ -38,11 +38,8 @@ def test_get_predictions():
     )
     preds = p.get_prediction_events()
     assert len(preds) == 16
-    assert preds[0] == [
-        "2020-09-24T21:31:31Z",
-        "2020-09-24T21:32:57Z",
-        "2020-09-24T21:34:24Z",
-    ]
+    preds = [[t.ut1 for t in pred] for pred in preds]
+    assert preds[0] == [2459117.396875682, 2459117.39787489, 2459117.3988819383]
 
     p = Predictions(
         lat=32.0853,
@@ -55,3 +52,13 @@ def test_get_predictions():
     )
     preds = p.get_prediction_events()
     assert len(preds) == 39
+
+
+def test_get_predictions():
+    start = 2459117.245895914
+    p = Predictions(
+        lat=32.0853, lng=34.7817, tz="Asia/Jerusalem", start=start, tle_file=STATIONS
+    )
+    preds = p.get_predictions()
+    assert len(preds) == 16
+    assert preds[0]["culminate"].ut1 == 2459117.39787489
