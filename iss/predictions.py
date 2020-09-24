@@ -47,16 +47,23 @@ class Predictions(object):
         t1 = ts.ut1_jd(t0.ut1 + self.days)
         return t0, t1
 
-    def get_prediction_details(self, rise, culminate, zet):
+    def get_position_details(self, t):
+        difference = self.satellite - self.location
+        topocentric = difference.at(t)
+        alt, az, distance = topocentric.altaz()
         return {
-            "rise": {"iso": rise.utc_iso(), "ut1": rise.ut1},
-            "culminate": {"iso": culminate.utc_iso(), "ut1": culminate.ut1},
-            "set": {"iso": zet.utc_iso(), "ut1": zet.ut1},
+            "time": t.utc_iso(),
+            "degrees": int(alt.degrees),
+            "azimuth": int(az.degrees),
+            "distance": int(distance.km),
         }
 
-    def get_position_details(self, satellite, t):
-        geocentric = satellite.at(t)
-        return {"distance": geocentric.position.km}
+    def get_prediction_details(self, rise, culminate, zet):
+        return {
+            "rise": self.get_position_details(rise),
+            "culminate": self.get_position_details(culminate),
+            "set": self.get_position_details(zet),
+        }
 
     def get_prediction_events(self):
         t0, t1 = self.get_next_days()

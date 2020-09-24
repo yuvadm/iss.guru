@@ -61,5 +61,7 @@ def test_get_predictions():
     )
     preds = p.get_predictions()
     assert len(preds) == 16
-    assert preds[0]["culminate"]["ut1"] == 2459117.39787489
-    assert preds[0]["rise"]["iso"] == "2020-09-24T21:31:31Z"
+    assert preds[0]["rise"]["time"] == "2020-09-24T21:31:31Z"
+    assert preds[0]["rise"]["azimuth"] == 332
+    assert preds[0]["culminate"]["degrees"] == 61
+    assert preds[0]["set"]["distance"] == 779
