@@ -25,9 +25,9 @@ def test_custom_start():
 def test_get_location():
     p = Predictions(lat=32.0853, lng=34.7817)
     tlv = Topos("32.0853 N", "34.7817 E")
-    topos = p.get_location()
-    assert topos.latitude.degrees == tlv.latitude.degrees
-    assert topos.longitude.degrees == tlv.longitude.degrees
+    location = p.location
+    assert location.latitude.degrees == tlv.latitude.degrees
+    assert location.longitude.degrees == tlv.longitude.degrees
 
 
 def test_get_prediction_events():

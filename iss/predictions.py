@@ -23,27 +23,29 @@ class Predictions(object):
         self.lng = lng
         self.altitude = altitude
         self.tz = tz
-        self.satellite = satellite
         self.start = start
         self.days = days
         self.tle_file = tle_file.resolve().as_posix() if tle_file else STATIONS_URL
 
+        self.satellite = self.init_satellite(satellite)
+        self.location = self.init_location()
+
     def init_stations(self):
         return load.tle_file(self.tle_file)
+
+    def init_satellite(self, satellite):
+        satellites = self.init_stations()
+        by_name = {sat.name: sat for sat in satellites}
+        return by_name[satellite]
+
+    def init_location(self):
+        return Topos(latitude_degrees=self.lat, longitude_degrees=self.lng)
 
     def get_next_days(self):
         ts = load.timescale()
         t0 = ts.now() if not self.start else ts.ut1_jd(self.start)
         t1 = ts.ut1_jd(t0.ut1 + self.days)
         return t0, t1
-
-    def get_location(self):
-        return Topos(latitude_degrees=self.lat, longitude_degrees=self.lng)
-
-    def get_satellite(self):
-        satellites = self.init_stations()
-        by_name = {sat.name: sat for sat in satellites}
-        return by_name[self.satellite]
 
     def get_prediction_details(self, rise, culminate, zet):
         return {
@@ -52,13 +54,15 @@ class Predictions(object):
             "set": {"iso": zet.utc_iso(), "ut1": zet.ut1},
         }
 
-    def get_prediction_events(self):
-        satellite = self.get_satellite()
-        t0, t1 = self.get_next_days()
-        location = self.get_location()
+    def get_position_details(self, satellite, t):
+        geocentric = satellite.at(t)
+        return {"distance": geocentric.position.km}
 
-        ts, _events = satellite.find_events(
-            location, t0, t1, altitude_degrees=self.altitude
+    def get_prediction_events(self):
+        t0, t1 = self.get_next_days()
+
+        ts, _events = self.satellite.find_events(
+            self.location, t0, t1, altitude_degrees=self.altitude
         )
 
         # events are returned as 3-tuples of (rise, culminate, set)
