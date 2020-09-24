@@ -3,11 +3,21 @@ from skyfield.api import Topos, load
 from .utils import chunks
 
 
-class Predictions(object):
-    ISS = "ISS (ZARYA)"
+ISS = "ISS (ZARYA)"
+STATIONS_URL = "http://celestrak.com/NORAD/elements/stations.txt"
 
+
+class Predictions(object):
     def __init__(
-        self, lat, lng, altitude=30.0, tz="UTC", satellite=ISS, start=None, days=10
+        self,
+        lat,
+        lng,
+        altitude=30.0,
+        tz="UTC",
+        satellite=ISS,
+        start=None,
+        days=10,
+        tle_file=None,
     ):
         self.lat = lat
         self.lng = lng
@@ -16,10 +26,10 @@ class Predictions(object):
         self.satellite = satellite
         self.start = start
         self.days = days
+        self.tle_file = tle_file.resolve().as_posix() if tle_file else STATIONS_URL
 
     def init_stations(self):
-        stations_url = "http://celestrak.com/NORAD/elements/stations.txt"
-        return load.tle_file(stations_url)
+        return load.tle_file(self.tle_file)
 
     def get_next_days(self):
         ts = load.timescale()
