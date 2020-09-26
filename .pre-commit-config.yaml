@@ -20,3 +20,4 @@ repos:
     language: system
     entry: pipenv run test
     types: [python]
+    pass_filenames: false

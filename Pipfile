@@ -14,6 +14,7 @@ pyephem = "*"
 skyfield = "*"
 fastapi = "*"
 uvicorn = "*"
+jinja2 = "*"
 
 [scripts]
 format = "black iss"
