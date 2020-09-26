@@ -12,7 +12,7 @@ class Predictions(object):
         self,
         lat,
         lng,
-        altitude=30.0,
+        altitude=0,
         tz="UTC",
         satellite=ISS,
         start=None,
