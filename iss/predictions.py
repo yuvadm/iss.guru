@@ -77,7 +77,13 @@ class Predictions(object):
         # docs mention the possibilibity of several culminations
         # https://rhodesmill.org/skyfield/earth-satellites.html#finding-when-a-satellite-rises-and-sets
         # but this doesn't seem to happen in our case
-        return list(chunks(ts, 3))
+        res = list(chunks(ts, 3))
+
+        if len(res[-1]) != 3:
+            # truncate the last event in case it's a partial one
+            res = res[:-1]
+
+        return res
 
     def get_predictions(self):
         preds = self.get_prediction_events()
