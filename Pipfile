@@ -21,7 +21,8 @@ geoip2 = "*"
 [scripts]
 format = "black iss"
 lint = "pylint -j 0 -d R,C iss"
-test = "pytest"
+test = "pytest iss/tests"
+compare = "pytest iss/tests --compare"
 server = "uvicorn iss.server:app"
 
 [requires]
