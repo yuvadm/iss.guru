@@ -16,6 +16,7 @@ fastapi = "*"
 uvicorn = "*"
 jinja2 = "*"
 aiofiles = "*"
+geoip2 = "*"
 
 [scripts]
 format = "black iss"
