@@ -1,0 +1,21 @@
+@font-face {
+	font-family: 'Iosevka Web';
+	font-display: swap;
+	font-weight: 400;
+	font-stretch: normal;
+	font-style: normal;
+	src: url('../fonts/iosevka-regular.woff2') format('woff2'), url('../fonts/iosevka-regular.woff') format('woff'), url('../fonts/iosevka-regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Iosevka Web';
+	font-display: swap;
+	font-weight: 700;
+	font-stretch: normal;
+	font-style: normal;
+	src: url('../fonts/iosevka-bold.woff2') format('woff2'), url('../fonts/iosevka-bold.woff') format('woff'), url('../fonts/iosevka-bold.ttf') format('truetype');
+}
+
+body {
+    font-family: "Iosevka Web", monospace;
+}
