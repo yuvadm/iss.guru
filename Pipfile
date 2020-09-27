@@ -15,6 +15,7 @@ skyfield = "*"
 fastapi = "*"
 uvicorn = "*"
 jinja2 = "*"
+aiofiles = "*"
 
 [scripts]
 format = "black iss"
