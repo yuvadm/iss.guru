@@ -1,4 +1,5 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/passes/{{ location.latitude }}/{{ location.longitude }}" class="link light-blue dim">{{ location.latitude }}, {{ location.longitude }}, {{ location.time_zone }}</a>
 {% endblock %}

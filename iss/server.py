@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, Response, Header
+from fastapi import FastAPI, Request, Header
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Optional
 
+from .geo import get_location
 from .predictions import Predictions
 
 app = FastAPI()
@@ -13,10 +14,12 @@ templates = Jinja2Templates(directory="iss/templates")
 
 
 @app.get("/")
-async def home(request: Request):
-    preds = Predictions(34.7641, 32.0669, altitude=0, days=5).get_grouped_predictions()
+async def home(request: Request, cf_connecting_ip: Optional[str] = Header(None)):
+    client_ip = cf_connecting_ip or request.client.host
+    location = get_location(client_ip)
+    # preds = Predictions(lat, lng, tz=tz, altitude=0, days=5).get_grouped_predictions()
     return templates.TemplateResponse(
-        "index.html", {"request": request, "predictions": preds}
+        "index.html", {"request": request, "location": location}
     )
 
 
@@ -31,8 +34,3 @@ async def passes(request: Request, lat: float, lng: float):
             "location": {"lat": lat, "lng": lng},
         },
     )
-
-
-@app.get("/ip")
-async def ip(request: Request, cf_connecting_ip: Optional[str] = Header(None)):
-    return Response(cf_connecting_ip or request.client.host)
