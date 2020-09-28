@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -30,3 +30,8 @@ async def passes(request: Request, lat: float, lng: float):
             "location": {"lat": lat, "lng": lng},
         },
     )
+
+
+@app.get("/ip")
+async def ip(request: Request):
+    return Response(request.client.host)
