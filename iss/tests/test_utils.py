@@ -1,4 +1,6 @@
-from ..utils import deg_to_cardinal, seconds_to_minutes
+import pytest
+
+from ..utils import deg_to_cardinal, seconds_to_minutes, normalize_lat_lng
 
 
 def test_seconds_to_minutes():
@@ -12,6 +14,29 @@ def test_seconds_to_minutes():
     ]
     for secs, s in cases:
         assert seconds_to_minutes(secs) == s
+
+
+def test_normalize_lat_lng():
+    cases = [
+        ("N12.345", "E67.890", 12.345, 67.890),
+        ("S12.345", "W67.890", -12.345, -67.890),
+        ("S11", "W22", -11, -22),
+        ("N0.987", "W0.123", 0.987, -0.123),
+        ("S88.765", "E177.654", -88.765, 177.654),
+    ]
+    for lat, lng, nlat, nlng in cases:
+        assert normalize_lat_lng(lat, lng) == (nlat, nlng)
+
+
+def test_fail_normalize_lat_lng():
+    failures = [
+        ("12", "E45"),
+        ("B12", "E45"),
+        ("12", "X45"),
+    ]
+    for lat, lng in failures:
+        with pytest.raises(Exception):
+            normalize_lat_lng(lat, lng)
 
 
 def test_deg_to_cardinal():
