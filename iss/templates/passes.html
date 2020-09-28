@@ -24,7 +24,7 @@
     {% for date, preds in predictions.items() %}
         {% set date_loop = loop %}
         {% for pred in preds %}
-        <tr class="pa1 {{ date_loop.cycle('light-gray', 'light-silver') }}">
+        <tr class="pa1 {{ date_loop.cycle('light-silver', 'light-gray') }}">
             {% if loop.first %}<td rowspan="{{ preds|length }}">{{ date }}</td>{% endif %}
             <td>{{ pred.length }}</td>
             <td>{{ pred.rise.time }}</td>
