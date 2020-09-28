@@ -1,3 +1,5 @@
+import json
+
 from fastapi import FastAPI, Request, Header
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -31,6 +33,7 @@ async def passes(request: Request, lat: float, lng: float):
         {
             "request": request,
             "predictions": preds,
+            "predictions_json": json.dumps(preds),
             "location": {"lat": lat, "lng": lng},
         },
     )
