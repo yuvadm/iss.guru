@@ -1,10 +1,11 @@
 import pytest
 
-from ..config import GEOIP_CITY_PATH
+from ..config import GEOIP_GEOLITE2_CITY_PATH
 from ..geo import get_location
 
 geoip_required = pytest.mark.skipif(
-    not GEOIP_CITY_PATH, reason="Path to GeoLite2 city database must be provided"
+    not GEOIP_GEOLITE2_CITY_PATH,
+    reason="Path to GeoLite2 city database must be provided",
 )
 
 

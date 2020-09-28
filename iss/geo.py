@@ -2,7 +2,7 @@ from collections import namedtuple
 import geoip2.database
 import geoip2.errors
 
-from .config import GEOIP_CITY_PATH
+from .config import GEOIP_GEOLITE2_CITY_PATH
 
 DEFAULT_LOCATION = {
     "latitude": 34.7641,
@@ -16,7 +16,7 @@ default_location = namedtuple("Location", DEFAULT_LOCATION.keys())(
 
 
 def get_location(ip):
-    with geoip2.database.Reader(GEOIP_CITY_PATH) as reader:
+    with geoip2.database.Reader(GEOIP_GEOLITE2_CITY_PATH) as reader:
         try:
             res = reader.city(ip)
             return res.location
