@@ -1,3 +1,4 @@
+from collections import defaultdict
 from skyfield.api import Topos, load
 
 from .utils import chunks
@@ -90,3 +91,18 @@ class Predictions(object):
     def get_predictions(self):
         preds = self.get_prediction_events()
         return [self.get_prediction_details(*p) for p in preds]
+
+    def truncate_prediction_dates(self, pred):
+        for t in ["rise", "culminate", "set"]:
+            pred[t]["time"] = pred[t]["time"][11:]
+        return pred
+
+    def get_grouped_predictions(self):
+        preds = self.get_predictions()
+        res = defaultdict(list)
+
+        for pred in preds:
+            date = pred["rise"]["time"][:10]
+            res[date].append(self.truncate_prediction_dates(pred))
+
+        return res

@@ -65,3 +65,15 @@ def test_get_predictions():
     assert preds[0]["rise"]["azimuth"] == 347
     assert preds[0]["culminate"]["degrees"] == 1
     assert preds[0]["set"]["distance"] == 2364
+
+
+def test_get_grouped_predictions():
+    start = 2459117.245895914
+    p = Predictions(
+        lat=32.0853, lng=34.7817, tz="Asia/Jerusalem", start=start, tle_file=STATIONS
+    )
+    preds = p.get_grouped_predictions()
+    assert "2020-09-28" in preds
+    assert preds["2020-09-28"][0]["rise"]["time"] == "10:14:44Z"
+    assert preds["2020-09-28"][1]["culminate"]["time"] == "11:51:14Z"
+    assert preds["2020-09-28"][1]["set"]["time"] == "11:56:36Z"
