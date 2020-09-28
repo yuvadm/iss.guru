@@ -59,7 +59,9 @@ class Predictions(object):
         }
 
     def get_prediction_details(self, rise, culminate, zet):
+        length = int((zet - rise) * 86400)
         return {
+            "length": length,
             "rise": self.get_position_details(rise),
             "culminate": self.get_position_details(culminate),
             "set": self.get_position_details(zet),
