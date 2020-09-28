@@ -28,7 +28,7 @@
             <th>Azimuth</th>
         </tr>
         <tr class="pa1" v-for="pred in localizedPredictions">
-            <td>[[ pred.length ]]</td>
+            <td class="f5">[[ pred.length_mins ]]</td>
             <td>[[ pred.date ]]</td>
             <td>[[ pred.rise.time ]]</td>
             <td>
@@ -40,7 +40,7 @@
                 <span class="f4">[[ pred.culminate.direction ]]</span>
                 <span class="f6 mid-gray">[[ pred.culminate.azimuth ]]</span>
             </td>
-            <td>[[ pred.culminate.degrees ]]</td>
+            <td class="f4">[[ pred.culminate.degrees ]]</td>
             <td>[[ pred.culminate.distance ]]</td>
             <td>[[ pred.set.time ]]</td>
             <td>

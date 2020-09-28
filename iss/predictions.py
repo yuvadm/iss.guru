@@ -1,7 +1,7 @@
 from collections import defaultdict
 from skyfield.api import Topos, load
 
-from .utils import chunks, deg_to_cardinal
+from .utils import chunks, deg_to_cardinal, seconds_to_minutes
 
 
 ISS = "ISS (ZARYA)"
@@ -65,6 +65,7 @@ class Predictions(object):
         length = int((zet - rise) * 86400)
         return {
             "length": length,
+            "length_mins": seconds_to_minutes(length),
             "rise": self.get_position_details(rise),
             "culminate": self.get_position_details(culminate),
             "set": self.get_position_details(zet),
