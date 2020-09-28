@@ -3,7 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from .predictions import Predictions
-from .utils import normalize_lat_lng
 
 app = FastAPI()
 
@@ -21,8 +20,7 @@ async def home(request: Request):
 
 
 @app.get("/passes/{lat}/{lng}")
-async def passes(request: Request, lat: str, lng: str):
-    lat, lng = normalize_lat_lng(lat, lng)
+async def passes(request: Request, lat: float, lng: float):
     preds = Predictions(lat, lng, altitude=0, days=5).get_grouped_predictions()
     return templates.TemplateResponse(
         "passes.html",
