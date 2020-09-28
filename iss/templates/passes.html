@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p class="f3">Passes for {{ location.lat }}, {{ location.lng }}</p>
+<table class="tl pa1 w-100">
+    <tr class=" tc pa1 f3">
+        <th colspan="1">Total</th>
+        <th colspan="2">Rise</th>
+        <th colspan="4">Culminate</th>
+        <th colspan="2">Set</th>
+    </tr>
+    <tr class="pa1 f4">
+        <th>Date</th>
+        <th>Length</th>
+        <th>Time</th>
+        <th>Azimuth</th>
+        <th>Time</th>
+        <th>Azimuth</th>
+        <th>Elevation</th>
+        <th>Distance</th>
+        <th>Time</th>
+        <th>Azimuth</th>
+    </tr>
+    {% for date, preds in predictions.items() %}
+        {% set date_loop = loop %}
+        {% for pred in preds %}
+        <tr class="pa1 {{ date_loop.cycle('light-gray', 'light-silver') }}">
+            {% if loop.first %}<td rowspan="{{ preds|length }}">{{ date }}</td>{% endif %}
+            <td>{{ pred.length }}</td>
+            <td>{{ pred.rise.time }}</td>
+            <td>{{ pred.rise.azimuth }} ({{ pred.rise.direction }})</td>
+            <td>{{ pred.culminate.time }}</td>
+            <td>{{ pred.culminate.azimuth }} ({{ pred.culminate.direction }})</td>
+            <td>{{ pred.culminate.degrees }}</td>
+            <td>{{ pred.culminate.distance }}</td>
+            <td>{{ pred.set.time }}</td>
+            <td>{{ pred.set.azimuth }} ({{ pred.set.direction }}) </td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+
+</table>
+{% endblock %}

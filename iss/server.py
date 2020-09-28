@@ -17,3 +17,16 @@ async def home(request: Request):
     return templates.TemplateResponse(
         "index.html", {"request": request, "predictions": preds}
     )
+
+
+@app.get("/passes/{lat}/{lng}")
+async def passes(request: Request, lat: float, lng: float):
+    preds = Predictions(lat, lng, altitude=0, days=5).get_grouped_predictions()
+    return templates.TemplateResponse(
+        "passes.html",
+        {
+            "request": request,
+            "predictions": preds,
+            "location": {"lat": lat, "lng": lng},
+        },
+    )
