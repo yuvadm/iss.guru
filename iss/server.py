@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, Header
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from typing import Optional
 
 from .predictions import Predictions
 
@@ -33,5 +34,5 @@ async def passes(request: Request, lat: float, lng: float):
 
 
 @app.get("/ip")
-async def ip(request: Request):
-    return Response(request.client.host)
+async def ip(request: Request, cf_connecting_ip: Optional[str] = Header(None)):
+    return Response(cf_connecting_ip or request.client.host)
