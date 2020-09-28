@@ -3,6 +3,10 @@ def chunks(l, n):
         yield l[i : i + n]
 
 
+def seconds_to_minutes(secs):
+    return f"{secs // 60}:{secs % 60:02}"
+
+
 def deg_to_cardinal(deg):
     cardinals = [
         "N",
