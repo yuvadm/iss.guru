@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+<script src="/static/js/vue.min.js"></script>
+<script src="/static/js/core.js"></script>
+{% endblock %}
+
 {% block content %}
 <p class="f3">Passes for {{ location.lat }}, {{ location.lng }}</p>
 <table class="tl pa1 w-100">
