@@ -74,6 +74,6 @@ def test_get_grouped_predictions():
     )
     preds = p.get_grouped_predictions()
     assert "2020-09-28" in preds
-    assert preds["2020-09-28"][0]["rise"]["time"] == "10:14:44Z"
-    assert preds["2020-09-28"][1]["culminate"]["time"] == "11:51:14Z"
-    assert preds["2020-09-28"][1]["set"]["time"] == "11:56:36Z"
+    assert preds["2020-09-28"][0]["rise"]["time"] == "10:14:44"
+    assert preds["2020-09-28"][1]["culminate"]["time"] == "11:51:14"
+    assert preds["2020-09-28"][1]["set"]["time"] == "11:56:36"

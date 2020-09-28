@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table class="tl pa1">
+<table class="tl pa1 w-100">
     <tr class=" tc pa1 f3">
         <th colspan="1">Total</th>
         <th colspan="2">Rise</th>
@@ -23,17 +23,17 @@
     {% for date, preds in predictions.items() %}
         {% set date_loop = loop %}
         {% for pred in preds %}
-        <tr class="pa2 {{ date_loop.cycle('light-gray', 'light-silver') }}">
+        <tr class="pa1 {{ date_loop.cycle('light-gray', 'light-silver') }}">
             {% if loop.first %}<td rowspan="{{ preds|length }}">{{ date }}</td>{% endif %}
             <td>{{ pred.length }}</td>
             <td>{{ pred.rise.time }}</td>
-            <td>{{ pred.rise.azimuth }}</td>
+            <td>{{ pred.rise.azimuth }} ({{ pred.rise.direction }})</td>
             <td>{{ pred.culminate.time }}</td>
-            <td>{{ pred.culminate.azimuth }}</td>
+            <td>{{ pred.culminate.azimuth }} ({{ pred.culminate.direction }})</td>
             <td>{{ pred.culminate.degrees }}</td>
             <td>{{ pred.culminate.distance }}</td>
             <td>{{ pred.set.time }}</td>
-            <td>{{ pred.set.azimuth }}</td>
+            <td>{{ pred.set.azimuth }} ({{ pred.set.direction }}) </td>
         </tr>
         {% endfor %}
     {% endfor %}

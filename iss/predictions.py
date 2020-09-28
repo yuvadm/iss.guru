@@ -1,7 +1,7 @@
 from collections import defaultdict
 from skyfield.api import Topos, load
 
-from .utils import chunks
+from .utils import chunks, deg_to_cardinal
 
 
 ISS = "ISS (ZARYA)"
@@ -52,10 +52,12 @@ class Predictions(object):
         difference = self.satellite - self.location
         topocentric = difference.at(t)
         alt, az, distance = topocentric.altaz()
+        azimuth = int(az.degrees)
         return {
             "time": t.utc_iso(),
             "degrees": int(alt.degrees),
-            "azimuth": int(az.degrees),
+            "azimuth": azimuth,
+            "direction": deg_to_cardinal(azimuth),
             "distance": int(distance.km),
         }
 
@@ -94,7 +96,7 @@ class Predictions(object):
 
     def truncate_prediction_dates(self, pred):
         for t in ["rise", "culminate", "set"]:
-            pred[t]["time"] = pred[t]["time"][11:]
+            pred[t]["time"] = pred[t]["time"][11:][:-1]
         return pred
 
     def get_grouped_predictions(self):
