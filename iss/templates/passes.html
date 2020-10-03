@@ -71,7 +71,7 @@
         data: {
             predictions: {{ predictions_json|safe }},
             display: {
-                hour12: false,
+                hour12: true,
                 degrees: true
             },
         },
@@ -84,7 +84,7 @@
                 }
             },
             localizedPredictions: function() {
-                var hour12 = this.display.hour12;
+                var hour12 = !this.display.hour12;
                 var preds = JSON.parse(JSON.stringify(this.predictions)).map(function(p) {
                     p.date = new Date(p.rise.time).toLocaleDateString();
                     p.rise.time = new Date(p.rise.time).toLocaleTimeString([], { hour12 });
