@@ -36,3 +36,8 @@ async def passes(request: Request, lat: float, lng: float):
             "location": {"lat": lat, "lng": lng},
         },
     )
+
+
+@app.get("/api/passes/{lat}/{lng}")
+async def passes_api(lat: float, lng: float):
+    return Predictions(lat, lng, altitude=0, days=5).get_predictions()
