@@ -8,6 +8,12 @@
 <div id="passes">
     <p class="f3">Passes for {{ location.lat }}, {{ location.lng }}</p>
     <p class="f4">Times localized for <span class="light-gray">[[ tz.name ]]</span> (UTC[[ tz.offset ]])</p>
+    <div>
+        <input type="checkbox" id="degrees" v-model="display.degrees">
+        <label for="degrees">Azimuth Degrees</label>
+        <input type="checkbox" id="hour12" v-model="display.hour12">
+        <label for="hour12">24-hour Times</label>
+    </div>
     <table class="tl pa1 w-100">
         <tr class="pa1 f3">
             <th colspan="1">Total</th>
@@ -27,25 +33,25 @@
             <th>Time</th>
             <th>Azimuth</th>
         </tr>
-        <tr class="pa1" v-for="pred in localizedPredictions">
+        <tr class="pa1" v-for="(pred, index) in localizedPredictions" v-bind:class="[ index % 2 == 0 ? 'light-silver' : 'light-gray' ]">
             <td class="f5">[[ pred.length_mins ]]</td>
             <td>[[ pred.date ]]</td>
             <td>[[ pred.rise.time ]]</td>
             <td>
-                <span class="f4">[[ pred.rise.direction ]]</span>
-                <span class="f6 mid-gray">[[ pred.rise.azimuth ]]</span>
+                <span class="f4" v-if="!display.degrees">[[ pred.rise.direction ]]</span>
+                <span class="f4" v-if="display.degrees">[[ pred.rise.azimuth ]]<span class="mid-gray">&deg;</span></span>
             </td>
             <td>[[ pred.culminate.time ]]</td>
             <td>
-                <span class="f4">[[ pred.culminate.direction ]]</span>
-                <span class="f6 mid-gray">[[ pred.culminate.azimuth ]]</span>
+                <span class="f4" v-if="!display.degrees">[[ pred.culminate.direction ]]</span>
+                <span class="f4" v-if="display.degrees">[[ pred.culminate.azimuth ]]<span class="mid-gray">&deg;</span></span>
             </td>
-            <td class="f4">[[ pred.culminate.degrees ]]</td>
+            <td class="f4">[[ pred.culminate.degrees ]]<span class="mid-gray">&deg;</span></td>
             <td>[[ pred.culminate.distance ]]</td>
             <td>[[ pred.set.time ]]</td>
             <td>
-                <span class="f4">[[ pred.set.direction ]]</span>
-                <span class="f6 mid-gray">[[ pred.set.azimuth ]]</span>
+                <span class="f4" v-if="!display.degrees">[[ pred.set.direction ]]</span>
+                <span class="f4" v-if="display.degrees">[[ pred.set.azimuth ]]<span class="mid-gray">&deg;</span></span>
             </td>
         </tr>
     </table>
@@ -64,7 +70,10 @@
         delimiters: ["[[","]]"],
         data: {
             predictions: {{ predictions_json|safe }},
-            hour12: false
+            display: {
+                hour12: false,
+                degrees: true
+            },
         },
         computed: {
             tz: function() {
@@ -75,8 +84,8 @@
                 }
             },
             localizedPredictions: function() {
-                var hour12 = this.hour12;
-                var preds = this.predictions.map(function(p) {
+                var hour12 = this.display.hour12;
+                var preds = JSON.parse(JSON.stringify(this.predictions)).map(function(p) {
                     p.date = new Date(p.rise.time).toLocaleDateString();
                     p.rise.time = new Date(p.rise.time).toLocaleTimeString([], { hour12 });
                     p.culminate.time = new Date(p.culminate.time).toLocaleTimeString([], { hour12 });
