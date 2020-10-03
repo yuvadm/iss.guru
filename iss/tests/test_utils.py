@@ -1,6 +1,11 @@
 import pytest
 
-from ..utils import deg_to_cardinal, seconds_to_minutes, normalize_lat_lng
+from ..utils import (
+    deg_to_cardinal,
+    seconds_to_minutes,
+    normalize_lat_lng,
+    display_lat_lng,
+)
 
 
 def test_seconds_to_minutes():
@@ -37,6 +42,17 @@ def test_fail_normalize_lat_lng():
     for lat, lng in failures:
         with pytest.raises(Exception):
             normalize_lat_lng(lat, lng)
+
+
+def test_display_lat_lng():
+    cases = [
+        (12.345, 67.890, "12.345°N", "67.89°E"),
+        (12.345, -67.890, "12.345°N", "67.89°W"),
+        (-12.345, -67.890, "12.345°S", "67.89°W"),
+        (-12.345, 67.890, "12.345°S", "67.89°E"),
+    ]
+    for lat, lng, dlat, dlng in cases:
+        assert display_lat_lng(lat, lng) == (dlat, dlng)
 
 
 def test_deg_to_cardinal():

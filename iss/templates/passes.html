@@ -6,7 +6,7 @@
 
 {% block content %}
 <div id="passes">
-    <p class="f3">Passes for {{ location.lat }}, {{ location.lng }}</p>
+    <p class="f3">Passes for {{ location.dlat }}, {{ location.dlng }}</p>
     <p class="f4">Times localized for <span class="light-gray">[[ tz.name ]]</span> (UTC[[ tz.offset ]])</p>
     <div>
         <input type="checkbox" id="degrees" v-model="display.degrees">

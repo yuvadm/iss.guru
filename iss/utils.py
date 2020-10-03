@@ -15,6 +15,12 @@ def normalize_lat_lng(lat, lng):
     return nlat, nlng
 
 
+def display_lat_lng(lat, lng):
+    dlat = str(abs(lat)) + "°" + ("N" if lat > 0 else "S")
+    dlng = str(abs(lng)) + "°" + ("E" if lng > 0 else "W")
+    return dlat, dlng
+
+
 def deg_to_cardinal(deg):
     cardinals = [
         "N",
