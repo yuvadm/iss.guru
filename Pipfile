@@ -17,6 +17,7 @@ uvicorn = "*"
 jinja2 = "*"
 aiofiles = "*"
 geoip2 = "*"
+zappa = "*"
 
 [scripts]
 format = "black iss"
