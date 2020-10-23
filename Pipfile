@@ -17,7 +17,7 @@ uvicorn = "*"
 jinja2 = "*"
 aiofiles = "*"
 geoip2 = "*"
-zappa = "*"
+zappa = {editable = true, git = "https://github.com/yuvadm/Zappa/", ref = "asgi"}
 
 [scripts]
 format = "black iss"
