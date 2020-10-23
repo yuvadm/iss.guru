@@ -16,9 +16,12 @@ default_location = namedtuple("Location", DEFAULT_LOCATION.keys())(
 
 
 def get_location(ip):
-    with geoip2.database.Reader(GEOIP_GEOLITE2_CITY_PATH) as reader:
-        try:
-            res = reader.city(ip)
-            return res.location
-        except geoip2.errors.AddressNotFoundError:
-            return default_location
+    try:
+        with geoip2.database.Reader(GEOIP_GEOLITE2_CITY_PATH) as reader:
+            try:
+                res = reader.city(ip)
+                return res.location
+            except geoip2.errors.AddressNotFoundError:
+                return default_location
+    except TypeError:
+        return default_location
