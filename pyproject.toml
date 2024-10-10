@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "issguru"
+version = "0.1.0"
+description = ""
+authors = ["Yuval Adam <_@yuv.al>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyephem = "^9.99"
+skyfield = "^1.49"
+fastapi = "^0.115.0"
+uvicorn = "^0.31.1"
+Jinja2 = "^3.1.4"
+aiofiles = "^24.1.0"
+geoip2 = "^4.8.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+ruff = "^0.6.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
