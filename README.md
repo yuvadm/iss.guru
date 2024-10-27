@@ -7,7 +7,7 @@ Built in Python using [Skyfield](https://rhodesmill.org/skyfield/) and [FastAPI]
 ## Dev
 
 ```bash
-$ uv
+$ uv sync
 ```
 
 Lock requirements prior to deploy:
