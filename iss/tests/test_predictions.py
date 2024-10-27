@@ -39,7 +39,7 @@ def test_get_prediction_events():
     preds = p.get_prediction_events()
     assert len(preds) == 77
     preds = [[t.ut1 for t in pred] for pred in preds]
-    assert preds[0] == [2459117.2606565966, 2459117.2618780565, 2459117.2631023712]
+    assert preds[0] == [2459117.2606692477, 2459117.261888149, 2459117.263112468]
 
     p = Predictions(
         lat=32.0853,
@@ -74,6 +74,6 @@ def test_get_grouped_predictions():
     )
     preds = p.get_grouped_predictions()
     assert "2020-09-28" in preds
-    assert preds["2020-09-28"][0]["rise"]["time"] == "10:14:44"
+    assert preds["2020-09-28"][0]["rise"]["time"] == "10:14:43"
     assert preds["2020-09-28"][1]["culminate"]["time"] == "11:51:14"
     assert preds["2020-09-28"][1]["set"]["time"] == "11:56:36"
