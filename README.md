@@ -7,7 +7,11 @@ Built in Python using [Skyfield](https://rhodesmill.org/skyfield/) and [FastAPI]
 ## Dev
 
 ```bash
-$ pipenv sync -d
-$ pipenv run pre-commit install
-$ pipenv run server
+$ uv
+```
+
+Lock requirements prior to deploy:
+
+```bash
+$ uv pip compile pyproject.toml -o requirements.txt
 ```
