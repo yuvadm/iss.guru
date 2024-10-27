@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>ISS Predictions | ISS.guru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,21 +9,28 @@
     <meta name="keywords" content="ISS, international space station, passes, predictions, overhead, amateur radio">
     <link rel="stylesheet" href="/static/css/tachyons.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="shortcut icon" href="/static/img/favicon.ico"/>
-    <script src="https://mink.iss.guru/script.js" site="TUVDMULX" defer></script>
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <script src="https://cdn.usefathom.com/script.js" data-site="BUVXMLRG" defer></script>
     {% block extrahead %}
     {% endblock %}
-  </head>
-  <body class="bg-near-black near-white">
+</head>
+
+<body class="bg-near-black near-white">
     <div class="pa4 mw8 center">
-      <a href="/" class="no-underline dim"><h1 class="f1 moon-gray">ISS Pass Predictions</h1></a>
-      <p class="light-red">Upcoming passes of the <a href="https://en.wikipedia.org/wiki/International_Space_Station" class="link red dim">International Space Station</a> at your location over the next 10 days.</p>
+        <a href="/" class="no-underline dim">
+            <h1 class="f1 moon-gray">ISS Pass Predictions</h1>
+        </a>
+        <p class="light-red">Upcoming passes of the <a href="https://en.wikipedia.org/wiki/International_Space_Station"
+                class="link red dim">International Space Station</a> at your location over the next 10 days.</p>
 
-      {% block content %}
-      {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-      <hr class="mt5 dark-gray">
-      <p class="near-white">Created by <a href="https://yuv.al/" class="link light-blue dim">Yuval Adam</a>, source code available on <a href="https://github.com/yuvadm/iss.guru" class="link light-blue dim">Github</a>.</p>
+        <hr class="mt5 dark-gray">
+        <p class="near-white">Created by <a href="https://yuv.al/" class="link light-blue dim">Yuval Adam</a>, source
+            code
+            available on <a href="https://github.com/yuvadm/iss.guru" class="link light-blue dim">Github</a>.</p>
     </div>
-  </body>
+</body>
+
 </html>
